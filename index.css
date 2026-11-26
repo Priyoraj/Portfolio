@@ -2123,3 +2123,174 @@ a{
         color: #0078f0;
     }
 }
+
+/* ---------- Added with the CV update ---------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* sections opened from the navigation bar stop just below it; main.js measures the bar */
+#home, #about, #research, #publications, #projects, #experience, #certificates, #service, #contact {
+    scroll-margin-top: calc(var(--nav-height, 72px) + 8px);
+}
+
+/* the bar's padding counts within its 100% width, so it no longer sticks out past the window */
+.nav-bar {
+    box-sizing: border-box;
+}
+
+.logo a {
+    display: block;
+    margin: 0;
+}
+
+.logo img {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+/* the active About / Skills / Education tab */
+.btn.active {
+    background-color: #1f32de;
+}
+
+/* readable text on the gradient buttons */
+.download a,
+.contact a {
+    color: #ffffff;
+}
+
+.languages i {
+    font-size: 30px;
+    margin-left: 6px;
+}
+
+.period {
+    font-size: small;
+    color: #6b6870;
+}
+
+/* links under each project */
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #041536;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.project-links a:hover {
+    background: #e8ecff;
+}
+
+/* experience */
+.job {
+    margin: 24px 0 32px;
+}
+
+.job h2 {
+    margin: 0 0 4px;
+    font-size: x-large;
+}
+
+.job p {
+    margin: 4px 0;
+    font-weight: 600;
+}
+
+.job-place a {
+    color: #041536;
+}
+
+.course-list {
+    columns: 2;
+    column-gap: 40px;
+}
+
+/* certificate and service lists */
+.section-intro {
+    color: #4f4c52;
+    font-weight: 500;
+    padding: 0 20px;
+}
+
+.cert-list {
+    list-style: none;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.cert-list li {
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-left: 4px solid #1f32de;
+    border-radius: 6px;
+    background: #f1f3ff;
+    color: #041536;
+    font-weight: 600;
+}
+
+.cert-list li a {
+    color: #1f32de;
+    text-decoration: none;
+}
+
+.cert-list li a:hover {
+    text-decoration: underline;
+}
+
+.cert-list li span {
+    display: block;
+    margin-top: 4px;
+    color: #4f4c52;
+    font-weight: 500;
+}
+
+.gallery-title {
+    margin-top: 40px;
+}
+
+/* on phones and tablets the section grows with its list, instead of scrolling inside a 300px box
+   (an id selector, so it also wins over Untitled-1.css, which loads later) */
+#certificates {
+    height: auto;
+    overflow: visible;
+}
+
+.cert-link {
+    display: block;
+    color: inherit;
+}
+
+.leadership {
+    text-align: center;
+    margin: 40px auto 60px;
+    color: #1f32de;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 767px) {
+    .course-list {
+        columns: 1;
+    }
+
+    .job h2 {
+        font-size: large;
+    }
+}

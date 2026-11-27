@@ -2278,11 +2278,54 @@ html {
     color: inherit;
 }
 
+.services-title {
+    font-size: xx-large;
+    font-weight: bold;
+    padding: 0 16px;
+}
+
 .leadership {
     text-align: center;
     margin: 40px auto 60px;
     color: #1f32de;
     font-weight: 700;
+}
+
+@media screen and (max-width: 575px) {
+    /* the gallery kept its 100px side margins, which left 190px for 300px-wide certificates */
+    .certificate-container {
+        margin: 20px 0;
+    }
+
+    /* the photo's box was 483px wide on every phone; it now fits the screen */
+    .profile-container-right1 {
+        width: auto;
+        max-width: 100%;
+    }
+
+    /* the research cards were 370px wide with their margins; they now fit the screen */
+    .services {
+        display: block;
+    }
+
+    .service-content {
+        width: 100%;
+        max-width: 330px;
+        margin: 20px 16px;
+    }
+
+    .services-title {
+        font-size: x-large;
+    }
+
+    /* the experience text kept a fixed width, and the DOI had nowhere to wrap */
+    .text1 {
+        width: auto;
+    }
+
+    .text a {
+        overflow-wrap: anywhere;
+    }
 }
 
 @media screen and (max-width: 767px) {

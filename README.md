@@ -6,10 +6,13 @@ Assam down town University, Guwahati.
 **Live site:** https://priyoraj.github.io/Portfolio/
 
 A single page of plain HTML, CSS and JavaScript (`index.html`, `index.css`, `Untitled-1.css`,
-`main.js`), published with GitHub Pages. Its content follows the CV in
-[Priyoraj/LaTeX-CV](https://github.com/Priyoraj/LaTeX-CV), and *Download CV* serves
-`Priya_Raj_Chanda_s_Resume.pdf`, a copy of that CV's PDF. When the CV changes, update the matching
-section of `index.html` and replace the PDF.
+`main.js`), published with GitHub Pages, with a light / dark switch. Its content follows the CV
+in [Priyoraj/LaTeX-CV](https://github.com/Priyoraj/LaTeX-CV); *Download CV* always fetches the
+latest PDF from that repository. When the CV's content changes, update the matching section of
+`index.html`.
 
-The skill icons in `icons/` come from [Devicon](https://devicon.dev) (MIT licence, see
-`icons/DEVICON-LICENSE`).
+`certificates/` holds pictures of the certificates for the gallery; each one links to the
+certificate's file on Google Drive.
+
+Apart from `fastai.png` (cut from the fast.ai logo), the skill icons in `icons/` come from
+[Devicon](https://devicon.dev) (MIT licence, see `icons/DEVICON-LICENSE`).

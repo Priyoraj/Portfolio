@@ -69,3 +69,24 @@ window.addEventListener('scroll', function() {
       secondElement.classList.remove('hover-effect');
   }
 });
+
+// Light / dark switch; the choice is remembered on this device
+var themeButton = document.getElementById('theme-toggle');
+
+function showTheme(theme) {
+  var next = theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  themeButton.innerHTML = '<i class="fa-solid fa-' + (theme === 'dark' ? 'sun' : 'moon') + '" aria-hidden="true"></i>';
+  themeButton.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+  themeButton.title = 'Switch to ' + next + ' mode';
+}
+
+showTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+
+themeButton.onclick = function () {
+  var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  showTheme(theme);
+  try {
+    localStorage.setItem('theme', theme);
+  } catch (e) {}
+};

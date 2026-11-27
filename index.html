@@ -9,8 +9,20 @@
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="Untitled-1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        // Use the saved theme, or else the device's setting, before the page is drawn
+        (function () {
+            var theme = null;
+            try { theme = localStorage.getItem("theme"); } catch (e) {}
+            if (theme !== "dark" && theme !== "light") {
+                theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
 </head>
 <body>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
     <div class="wrapper-main">
         <div class="nav-bar">
             <div class="logo">
@@ -28,7 +40,7 @@
                 <img src="background.png" alt="">
             </div>
             <div id="mobile-view" class="profile-container-right1">
-                <img src="profile_image_edited.jpg" alt="Priya Raj Chanda">
+                <img class="hero-photo" src="profile-photo.jpg" alt="Priya Raj Chanda">
             </div>
             <div class="profile-container-left">
                 <h2>Assistant Professor &middot; Computer Science &amp; Engineering</h2>
@@ -36,10 +48,10 @@
                 <p>I teach Computer Science &amp; Engineering at Assam down town University, Guwahati.
                     My research interests focus on</p>
                     <span id="typed-text" data-period="2000" data-type='[ "Computer Vision", "Machine Learning", "Deep Learning", "Internet of Things"]'></span><br>
-                <button type="button" class="download"><a href="Priya_Raj_Chanda_s_Resume.pdf">Download CV</a></button>
+                <button type="button" class="download"><a href="https://raw.githubusercontent.com/Priyoraj/LaTeX-CV/main/Priya_Raj_Chanda_s_CV.pdf">Download CV</a></button>
             </div>
             <div id="pc-view" class="profile-container-right">
-                <img src="profile_image_edited.jpg" alt="Priya Raj Chanda">
+                <img class="hero-photo" src="profile-photo.jpg" alt="Priya Raj Chanda">
             </div>
         </div>
         <div id="about" class="about">
@@ -62,29 +74,33 @@
                         application of emerging technologies to real-world problems.</p>
                 </div>
                 <div id="skills" style="display: none;" class="about-container">
-                    <h1>SKILLS</h1>
+                    <h2>SKILLS</h2>
                     <p>The languages, libraries and tools I use in teaching and research.</p>
-                    <div class="language-container">
-                        <h3>Programming Languages</h3>
-                        <div class="container">
-                            <div class="languages"><span>C <img src="icons/c.svg" alt=""></span></div>
-                            <div class="languages"><span>C++ <img src="icons/cplusplus.svg" alt=""></span></div>
-                            <div class="languages"><span>Python <img src="icons/python.svg" alt=""></span></div>
-                            <div class="languages"><span>JavaScript <img src="icons/javascript.svg" alt=""></span></div>
-                            <div class="languages"><span>WebAssembly <img src="icons/wasm.svg" alt=""></span></div>
-                        </div>
-                        <h3>Libraries &amp; Tools</h3>
-                        <div class="container">
-                            <div class="languages"><span>PyTorch <img src="icons/pytorch.svg" alt=""></span></div>
-                            <div class="languages"><span>Fast.ai <img src="Fast.ai.png" alt=""></span></div>
-                            <div class="languages"><span>IceVision <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span></div>
-                            <div class="languages"><span>TensorFlow <img src="icons/tensorflow.svg" alt=""></span></div>
-                            <div class="languages"><span>Keras <img src="icons/keras.svg" alt=""></span></div>
-                        </div>
+                    <div class="skill-group">
+                        <h3>Programming</h3>
+                        <ul class="skill-chips">
+                            <li><img src="icons/c.svg" alt="">C</li>
+                            <li><img src="icons/cplusplus.svg" alt="">C++</li>
+                            <li><img src="icons/python.svg" alt="">Python</li>
+                            <li><img src="icons/javascript.svg" alt="">JavaScript</li>
+                            <li><img src="icons/wasm.svg" alt="">WebAssembly</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Libraries &amp; tools</h3>
+                        <ul class="skill-chips">
+                            <li><img src="icons/pytorch.svg" alt="">PyTorch</li>
+                            <li><img src="icons/fastai.png" alt="">Fast.ai</li>
+                            <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>IceVision</li>
+                            <li><img src="icons/tensorflow.svg" alt="">TensorFlow</li>
+                            <li><img src="icons/keras.svg" alt="">Keras</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
                         <h3>Typesetting</h3>
-                        <div class="container">
-                            <div class="languages"><span>LaTeX <img src="icons/latex.svg" alt=""></span></div>
-                        </div>
+                        <ul class="skill-chips">
+                            <li><span class="latex" aria-label="LaTeX">L<span class="latex-a">a</span>T<span class="latex-e">e</span>X</span></li>
+                        </ul>
                     </div>
                 </div>
                 <div id="education-details" style="display: none;" class="education-details-container">
@@ -127,14 +143,6 @@
                     </span>
                 </div>
                 <div class="service-content">
-                    <i class="fa-solid fa-brain" style="font-size: xx-large;"></i>
-                    <h3>Machine Learning</h3>
-                    <span class="inner-text">
-                        Proficient in applying machine learning algorithms to analyze and interpret complex data,
-                        enabling data-driven decision-making and predictive modeling.
-                    </span>
-                </div>
-                <div class="service-content">
                     <i class="fa-solid fa-diagram-project" style="font-size: xx-large;"></i>
                     <h3>Deep Learning</h3>
                     <span class="inner-text">
@@ -150,7 +158,7 @@
                     </span>
                 </div>
             </div>
-            <h3 style="font-size: large; font-weight: bold;">Want to work with me in collaborative projects? <a href="mailto:priyarajchanda@gmail.com" style="color: rgb(0, 98, 255);">Contact Me</a></h3>
+            <h3 class="contact-prompt">Want to work with me in collaborative projects? <a class="contact-link" href="mailto:priyarajchanda@gmail.com">Contact Me</a></h3>
         </div>
         <div id="publications" class="publication">
             <h1>Featured Publications</h1>
@@ -168,8 +176,8 @@
             </div>
         </div>
         <div id="projects" class="projects">
-            <h2 style="font-size: large;color: rgb(5, 97, 217);font-weight: bold;">Projects</h2>
-            <h1 style="font-size: xx-large; font-weight: bold;">My Recent Works</h1>
+            <h2 class="projects-kicker">Projects</h2>
+            <h1 class="projects-title">My Recent Works</h1>
             <div class="project-container">
                 <div id="first" class="project-content">
                     <h1>PaperBot: Automated Research-Paper Request Assistant</h1>
@@ -273,9 +281,64 @@
         <h2 class="gallery-title">Certificate gallery</h2>
         <div class="certificate-container">
             <div class="certificate">
+                <a class="cert-link" href="https://drive.google.com/file/d/1EiFM5zp710JMe26lP_MTdjMw3ejmifCT/view?usp=drive_link">
+                    <div class="inner-class">
+                        <img src="certificates/fdp-genai.jpg" width="400" height="300" loading="lazy" alt="Certificate: FDP on Generative AI &amp; Agentic AI, Assam down town University">
+                    </div>
+                    <div class="overlay">
+                        <h3>FDP on Generative AI &amp; Agentic AI</h3>
+                        <h2>Assam down town University</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="certificate">
+                <a class="cert-link" href="https://drive.google.com/file/d/1OChnYzTUL_kv7vNiY-iNZFfVF7Yy-fP-/view">
+                    <div class="inner-class">
+                        <img src="certificates/fdp-quantum.jpg" width="400" height="300" loading="lazy" alt="Certificate: FDP on Quantum Computing Foundations and Applications, Assam down town University">
+                    </div>
+                    <div class="overlay">
+                        <h3>FDP on Quantum Computing Foundations and Applications</h3>
+                        <h2>Assam down town University</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="certificate">
+                <a class="cert-link" href="https://drive.google.com/file/d/1GkauKiD-faksW_H-e1YVG0FRoTd1Y6Gw/view">
+                    <div class="inner-class">
+                        <img src="certificates/iitg-hw-accelerators.jpg" width="400" height="300" loading="lazy" alt="Certificate: Workshop on Hardware Accelerators for Neural Network Applications, IIT Guwahati &amp; IEEE Kolkata Section">
+                    </div>
+                    <div class="overlay">
+                        <h3>Workshop on Hardware Accelerators for Neural Network Applications</h3>
+                        <h2>IIT Guwahati &amp; IEEE Kolkata Section</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="certificate">
+                <a class="cert-link" href="https://drive.google.com/file/d/1hxyq4EwJViLteH_s38yKJDIG6zEyN-yw/view?usp=sharing">
+                    <div class="inner-class">
+                        <img src="certificates/fdp-raftml.jpg" width="400" height="300" loading="lazy" alt="Certificate: FDP on Recent Advancement &amp; Future Trends in AI and ML, Abacus Institute of Engineering and Management">
+                    </div>
+                    <div class="overlay">
+                        <h3>FDP on Recent Advancement &amp; Future Trends in AI and ML</h3>
+                        <h2>Abacus Institute of Engineering and Management</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="certificate">
+                <a class="cert-link" href="https://drive.google.com/file/d/1nkywl5fc3onvEmR8JhIFHx_8UYcwEUbY/view?usp=sharing">
+                    <div class="inner-class">
+                        <img src="certificates/fdp-iot-aiml.jpg" width="400" height="300" loading="lazy" alt="Certificate: FDP on IoT with AI and ML, Academy of Technology, Hooghly">
+                    </div>
+                    <div class="overlay">
+                        <h3>FDP on IoT with AI and ML</h3>
+                        <h2>Academy of Technology, Hooghly</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="certificate">
                 <a class="cert-link" href="https://drive.google.com/file/d/14PB8_c5nCV9akWrfmdYdHLCoCkthIhet/view?usp=sharing">
                     <div class="inner-class">
-                        <img src="1.png" width="400" height="300" alt="Certificate: 6th Summer School on AI, IIIT Hyderabad">
+                        <img src="certificates/summer-school-ai.jpg" width="400" height="300" loading="lazy" alt="Certificate: 6th Summer School on AI, IIIT Hyderabad">
                     </div>
                     <div class="overlay">
                         <h3>6th Summer School on AI</h3>
@@ -284,20 +347,20 @@
                 </a>
             </div>
             <div class="certificate">
-                <a class="cert-link" href="https://drive.google.com/file/d/1H-Ha-RE7amy0kRLSrc0BiSP4dSCIaA6K/view?usp=sharing">
+                <a class="cert-link" href="https://drive.google.com/file/d/1qrwGlTguMqHuLFoG9R3_M4pFOLr7850p/view?usp=sharing">
                     <div class="inner-class">
-                        <img src="2.png" width="400" height="300" alt="Certificate: Workshop on IoT &amp; Its Applications, CIT Kokrajhar ACM Student Chapter">
+                        <img src="certificates/ml-python-skyfi.jpg" width="400" height="300" loading="lazy" alt="Certificate: Machine Learning Using Python, Skyfilabs">
                     </div>
                     <div class="overlay">
-                        <h3>Workshop on IoT &amp; Its Applications</h3>
-                        <h2>CIT Kokrajhar ACM Student Chapter</h2>
+                        <h3>Machine Learning Using Python</h3>
+                        <h2>Skyfilabs</h2>
                     </div>
                 </a>
             </div>
             <div class="certificate">
                 <a class="cert-link" href="https://drive.google.com/file/d/1PJgvEGv3F3bIdsVFiNCZsQhPgqEcOGZf/view?usp=sharing">
                     <div class="inner-class">
-                        <img src="3.png" width="400" height="300" alt="Certificate: Web Development using Python, OgmaTechLab">
+                        <img src="certificates/web-dev-python-ogma.jpg" width="400" height="300" loading="lazy" alt="Certificate: Web Development using Python, OgmaTechLab">
                     </div>
                     <div class="overlay">
                         <h3>Web Development using Python</h3>
@@ -306,9 +369,20 @@
                 </a>
             </div>
             <div class="certificate">
+                <a class="cert-link" href="https://drive.google.com/file/d/1H-Ha-RE7amy0kRLSrc0BiSP4dSCIaA6K/view?usp=sharing">
+                    <div class="inner-class">
+                        <img src="certificates/iot-workshop-acm.jpg" width="400" height="300" loading="lazy" alt="Certificate: Workshop on IoT &amp; Its Applications, CIT Kokrajhar ACM Student Chapter">
+                    </div>
+                    <div class="overlay">
+                        <h3>Workshop on IoT &amp; Its Applications</h3>
+                        <h2>CIT Kokrajhar ACM Student Chapter</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="certificate">
                 <a class="cert-link" href="https://drive.google.com/file/d/1ZxBTVE3T-Dbd9iVSJZ-SoHss1sIOy5Yj/view?usp=sharing">
                     <div class="inner-class">
-                        <img src="4.png" width="400" height="300" alt="Certificate: Python Scripting and Security, Techcracy 2016">
+                        <img src="certificates/python-security-techcracy.jpg" width="400" height="300" loading="lazy" alt="Certificate: Python Scripting and Security, Techcracy 2016">
                     </div>
                     <div class="overlay">
                         <h3>Python Scripting and Security</h3>
@@ -317,13 +391,24 @@
                 </a>
             </div>
             <div class="certificate">
-                <a class="cert-link" href="https://drive.google.com/file/d/1qrwGlTguMqHuLFoG9R3_M4pFOLr7850p/view?usp=sharing">
+                <a class="cert-link" href="https://drive.google.com/file/d/1ZnYxLv5BMT7kqaCPsxcxafg86vTerdig/view">
                     <div class="inner-class">
-                        <img src="5.png" width="400" height="300" alt="Certificate: Machine Learning Using Python, Skyfilabs">
+                        <img src="certificates/resource-person-sdp.jpg" width="400" height="300" loading="lazy" alt="Certificate: Resource Person, Skill Development Program, Assam down town University &amp; Rotary Club of Guwahati">
                     </div>
                     <div class="overlay">
-                        <h3>Machine Learning Using Python</h3>
-                        <h2>Skyfilabs</h2>
+                        <h3>Resource Person, Skill Development Program</h3>
+                        <h2>Assam down town University &amp; Rotary Club of Guwahati</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="certificate">
+                <a class="cert-link" href="https://drive.google.com/file/d/1epEgTLdh-mOB0pqq_2WUmILy305SlNiP/view?usp=sharing">
+                    <div class="inner-class">
+                        <img src="certificates/experience-aot.jpg" width="400" height="300" loading="lazy" alt="Certificate: Experience Certificate, Academy of Technology, Hooghly">
+                    </div>
+                    <div class="overlay">
+                        <h3>Experience Certificate</h3>
+                        <h2>Academy of Technology, Hooghly</h2>
                     </div>
                 </a>
             </div>

@@ -2297,10 +2297,19 @@ html {
         margin: 20px 0;
     }
 
-    /* the photo's box was 483px wide on every phone; it now fits the screen */
+    /* the photo's box was 483px wide on every phone; it now fits the screen, and the
+       text below it uses the full width instead of being stretched past the edges */
     .profile-container-right1 {
         width: auto;
         max-width: 100%;
+    }
+
+    .profile {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .profile-container-left {
+        margin: 0 auto;
     }
 
     /* the research cards were 370px wide with their margins; they now fit the screen */

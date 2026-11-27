@@ -1,18 +1,38 @@
 // Sections opened from the navigation bar stop just below it, however tall the bar is
+// (not measured while the phone menu is open, which is much taller)
 function setNavHeight() {
-  document.documentElement.style.setProperty('--nav-height', document.querySelector('.nav-bar').offsetHeight + 'px');
+  var bar = document.querySelector('.nav-bar');
+  if (bar.classList.contains('open')) return;
+  document.documentElement.style.setProperty('--nav-height', bar.offsetHeight + 'px');
 }
 setNavHeight();
 window.addEventListener('resize', setNavHeight);
 
-// About / Skills / Education tabs: show the chosen panel and highlight its button
-const tabs = document.querySelectorAll(".nav-tabs .btn");
-tabs.forEach(function (tab) {
+// About / Skills / Education tabs: show the chosen panel and highlight its button.
+// The arrow keys, Home and End move between the tabs, as in other tab controls.
+const tabs = Array.prototype.slice.call(document.querySelectorAll(".nav-tabs .btn"));
+
+function showTab(tab) {
+  tabs.forEach(function (other) {
+    var chosen = other === tab;
+    other.classList.toggle("active", chosen);
+    other.setAttribute("aria-selected", chosen ? "true" : "false");
+    other.tabIndex = chosen ? 0 : -1;
+    document.getElementById(other.dataset.target).style.display = chosen ? "block" : "none";
+  });
+}
+
+tabs.forEach(function (tab, i) {
   tab.onclick = function () {
-    tabs.forEach(function (other) {
-      other.classList.toggle("active", other === tab);
-      document.getElementById(other.dataset.target).style.display = other === tab ? "block" : "none";
-    });
+    showTab(tab);
+  };
+  tab.onkeydown = function (e) {
+    var next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+    if (next === undefined) return;
+    e.preventDefault();
+    var target = tabs[(next + tabs.length) % tabs.length];
+    showTab(target);
+    target.focus();
   };
 });
 
@@ -23,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let index = 0;
   let letterIndex = 0;
+
+  // Visitors who ask their device for less motion see the topics without the typing effect
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function typeText() {
     if (letterIndex <= data[index].length) {
@@ -45,7 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  setTimeout(typeText, 300); // Adjust the delay before starting the typing animation
+  if (reduceMotion) {
+    typedTextElement.textContent = data.join(' \u00b7 ');
+  } else {
+    setTimeout(typeText, 300); // Adjust the delay before starting the typing animation
+  }
 
   // Keep the copyright year current
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -90,3 +117,39 @@ themeButton.onclick = function () {
     localStorage.setItem('theme', theme);
   } catch (e) {}
 };
+
+// Menu button on phones and tablets, where the navigation bar is hidden
+var menuButton = document.getElementById('menu-toggle');
+var siteNav = document.getElementById('site-nav');
+
+function setMenu(open) {
+  siteNav.classList.toggle('open', open);
+  menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menuButton.setAttribute('aria-label', open ? 'Close the menu' : 'Open the menu');
+  menuButton.querySelector('i').className = 'fa-solid fa-' + (open ? 'xmark' : 'bars');
+}
+
+menuButton.onclick = function () {
+  setMenu(!siteNav.classList.contains('open'));
+};
+
+// Choosing a section, pressing Escape or tapping outside the menu closes it
+siteNav.addEventListener('click', function (e) {
+  if (e.target.closest('a')) setMenu(false);
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && siteNav.classList.contains('open')) {
+    setMenu(false);
+    menuButton.focus();
+  }
+});
+
+document.addEventListener('click', function (e) {
+  var path = e.composedPath();
+  if (siteNav.classList.contains('open') && path.indexOf(siteNav) < 0 && path.indexOf(menuButton) < 0) setMenu(false);
+});
+
+window.addEventListener('resize', function () {
+  if (window.innerWidth > 991 && siteNav.classList.contains('open')) setMenu(false);
+});

@@ -14,5 +14,11 @@ latest PDF from that repository. When the CV's content changes, update the match
 `certificates/` holds pictures of the certificates for the gallery; each one links to the
 certificate's file on Google Drive.
 
+`social-card.jpg` is the picture shown when a link to the site is shared (LinkedIn, WhatsApp, X and
+others), and `apple-touch-icon.png` the icon of a phone's home-screen shortcut. `profile-photo-640.jpg`
+is a smaller copy of `profile-photo.jpg` that phones load; if you change the photo, replace both and
+make a new social card. What search engines read (title, description and the `application/ld+json`
+block) is in the `<head>` of `index.html`.
+
 Apart from `fastai.png` (cut from the fast.ai logo), the skill icons in `icons/` come from
 [Devicon](https://devicon.dev) (MIT licence, see `icons/DEVICON-LICENSE`).
